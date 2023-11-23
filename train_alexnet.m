@@ -3,8 +3,8 @@ function train_alexnet()
 net = alexnet;
 
 % Load data and split data for training and validation
-imds = imageDatastore('Dataset', 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
-[imdsTrain,imdsValidation] = splitEachLabel(imds, 0.7, 'randomized');
+imds = imageDatastore('./Dataset', 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+[imdsTrain,imdsValidation] = splitEachLabel(imds, 0.8, 'randomized');
 
 % Get input size
 inputSize = net.Layers(1).InputSize;
@@ -31,5 +31,5 @@ options = trainingOptions('sgdm', 'MiniBatchSize', 10, 'MaxEpochs', 10, 'Initial
 net = trainNetwork(augimdsTrain, layers, options);
 
 % Save model
-save("alexnet.mat", "net");
+save("./Model/alexnet.mat", "net");
 end
