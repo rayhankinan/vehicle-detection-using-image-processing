@@ -32,4 +32,5 @@ net = trainNetwork(augimdsTrain, layers, options);
 
 % Save model
 save("./Model/alexnet.mat", "net");
+
 end
