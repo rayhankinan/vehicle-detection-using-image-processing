@@ -8,7 +8,7 @@ imds = imageDatastore('./Dataset','IncludeSubfolders',true,'LabelSource','folder
 
 % Extracts SURF features from all images in all image categories
 % Constructs the visual vocabulary by reducing the number of features through quantization of feature space using K-means clustering
-bag = bagOfFeatures(trainingSet, "CustomExtractor", @custom_extractor);
+bag = bagOfFeatures(trainingSet, "CustomExtractor", @custom_extractor, "TreeProperties", [1 1000]);
 
 % Encoded training images from each category are fed into a SVM classifier
 categoryClassifier = trainImageCategoryClassifier(trainingSet, bag);
