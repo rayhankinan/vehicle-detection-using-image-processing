@@ -3,8 +3,8 @@ function train_alexnet()
 net = alexnet;
 
 % Load data and split data for training and validation
-imds = imageDatastore('./Dataset', 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
-[imdsTrain,imdsValidation] = splitEachLabel(imds, 0.8, 'randomized');
+imds = imageDatastore("./Dataset", "IncludeSubfolders", true, "LabelSource", "foldernames");
+[imdsTrain,imdsValidation] = splitEachLabel(imds, 0.8, "randomized");
 
 % Get input size
 inputSize = net.Layers(1).InputSize;
@@ -15,19 +15,19 @@ numClasses = numel(categories(imdsTrain.Labels));
 % Construct layers
 layers = [
     layersTransfer
-    fullyConnectedLayer(numClasses, 'WeightLearnRateFactor', 20, 'BiasLearnRateFactor', 20)
+    fullyConnectedLayer(numClasses, "WeightLearnRateFactor", 20, "BiasLearnRateFactor", 20)
     softmaxLayer
     classificationLayer
     ];
 
 % Augmentation
 pixelRange = [-30 30];
-imageAugmenter = imageDataAugmenter('RandXReflection', true, 'RandXTranslation', pixelRange, 'RandYTranslation', pixelRange);
-augimdsTrain = augmentedImageDatastore(inputSize(1:2), imdsTrain, 'DataAugmentation', imageAugmenter, 'ColorPreprocessing', 'gray2rgb');
-augimdsValidation = augmentedImageDatastore(inputSize(1:2), imdsValidation, 'ColorPreprocessing', 'gray2rgb');
+imageAugmenter = imageDataAugmenter("RandXReflection", true, "RandXTranslation", pixelRange, "RandYTranslation", pixelRange);
+augimdsTrain = augmentedImageDatastore(inputSize(1:2), imdsTrain, "DataAugmentation", imageAugmenter, "ColorPreprocessing", "gray2rgb");
+augimdsValidation = augmentedImageDatastore(inputSize(1:2), imdsValidation, "ColorPreprocessing", "gray2rgb");
 
 % Train with mini-batch gradient descent
-options = trainingOptions('sgdm', 'MiniBatchSize', 10, 'MaxEpochs', 10, 'InitialLearnRate', 1e-4, 'Shuffle', 'every-epoch', 'ValidationData', augimdsValidation, 'ValidationFrequency', 3, 'Verbose', false, 'Plots', 'training-progress');
+options = trainingOptions("sgdm", "MiniBatchSize", 10, "MaxEpochs", 10, "InitialLearnRate", 1e-4, "Shuffle", "every-epoch", "ValidationData", augimdsValidation, "ValidationFrequency", 3, "Verbose", false, "Plots", "training-progress");
 net = trainNetwork(augimdsTrain, layers, options);
 
 % Save model
