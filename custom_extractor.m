@@ -6,8 +6,8 @@ if size(I, 3) == 3
 end
 
 % Extract features using your custom method
-% For example, using SURF features
-points = detectSURFFeatures(I);
+% For example, using SIFT features
+points = detectSIFTFeatures(I);
 [features, valid_points] = extractFeatures(I, points);
 
 % Define feature metrics (e.g., the strongest features)

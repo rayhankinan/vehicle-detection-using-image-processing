@@ -6,7 +6,7 @@ imds = imageDatastore('./Dataset','IncludeSubfolders',true,'LabelSource','folder
 % Separate the sets into training and validation data
 [trainingSet, validationSet] = splitEachLabel(imds, 0.8, 'randomize');
 
-% Extracts SURF features from all images in all image categories
+% Extracts SIFT features from all images in all image categories
 % Constructs the visual vocabulary by reducing the number of features through quantization of feature space using K-means clustering
 bag = bagOfFeatures(trainingSet, "CustomExtractor", @custom_extractor, "TreeProperties", [1 1000]);
 
