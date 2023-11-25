@@ -1,7 +1,7 @@
 function train_bag_of_features()
 
 % Load the image collection using an imageDatastore
-imds = imageDatastore("./Dataset", "IncludeSubfolders", true,"LabelSource", "foldernames");
+imds = imageDatastore("./Dataset", "IncludeSubfolders", true, "LabelSource", "foldernames");
 
 % Separate the sets into training and validation data
 [trainingSet, validationSet] = splitEachLabel(imds, 0.8, "randomize");
