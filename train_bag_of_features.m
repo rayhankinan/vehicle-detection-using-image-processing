@@ -18,6 +18,6 @@ categoryClassifier = trainImageCategoryClassifier(trainingSet, bag, "LearnerOpti
 evaluate(categoryClassifier, validationSet);
 
 % Save the classifier
-save("./Model/categoryClassifier.mat", "categoryClassifier");
+save("./Model/bagOfFeatures.mat", "categoryClassifier");
 
 end
