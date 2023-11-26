@@ -4,7 +4,7 @@ net = alexnet;
 
 % Load data and split data for training and validation
 imds = imageDatastore("./Dataset", "IncludeSubfolders", true, "LabelSource", "foldernames");
-[imdsTrain,imdsValidation] = splitEachLabel(imds, 0.8, "randomized");
+[imdsTrain, imdsValidation] = splitEachLabel(imds, 0.8, "randomized");
 
 % Get input size
 inputSize = net.Layers(1).InputSize;
